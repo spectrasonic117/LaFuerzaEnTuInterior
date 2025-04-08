@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "gradle",
+            "id": "/Users/spectra/Desktop/LaFuerzaEnTuInteriorbuildLaFuerzaEnTuInterior",
+            "script": "build",
+            "description": "Assembles and tests this project.",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "project": "LaFuerzaEnTuInterior",
+            "buildFile": "/Users/spectra/Desktop/LaFuerzaEnTuInterior/build.gradle",
+            "rootProject": "LaFuerzaEnTuInterior",
+            "projectFolder": "/Users/spectra/Desktop/LaFuerzaEnTuInterior",
+            "workspaceFolder": "/Users/spectra/Desktop/LaFuerzaEnTuInterior",
+            "args": "",
+            "javaDebug": false,
+            "problemMatcher": [
+                "$gradle"
+            ],
+            "label": "gradle: build"
+        }
+    ]
+}
