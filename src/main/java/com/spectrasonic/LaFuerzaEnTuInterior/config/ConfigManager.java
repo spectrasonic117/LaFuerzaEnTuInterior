@@ -24,6 +24,7 @@ public class ConfigManager {
     private int pointGain;
     private int pointLoss;
     
+    @Getter
     private List<Location> respawnPoints;
     
     public ConfigManager(JavaPlugin plugin) {

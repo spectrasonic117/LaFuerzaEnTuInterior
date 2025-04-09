@@ -7,6 +7,7 @@ import com.spectrasonic.LaFuerzaEnTuInterior.events.RespawnListener;
 import com.spectrasonic.LaFuerzaEnTuInterior.game.GameManager;
 import com.spectrasonic.LaFuerzaEnTuInterior.player.PlayerManager;
 import com.spectrasonic.LaFuerzaEnTuInterior.player.PointManager;
+import com.spectrasonic.LaFuerzaEnTuInterior.game.SpawnManager;
 import com.spectrasonic.Utils.MessageUtils;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,8 @@ public final class Main extends JavaPlugin {
     private PlayerManager playerManager;
     private PointManager pointManager;
     private GameEvents gameEvents;
+    private SpawnManager spawnManager;
+    
 
     @Override
     public void onEnable() {
@@ -29,7 +32,8 @@ public final class Main extends JavaPlugin {
         this.playerManager = new PlayerManager(this);
         this.gameManager = new GameManager(this);
         this.gameEvents = new GameEvents(this);
-        
+        this.spawnManager = new SpawnManager(this);
+              
         registerCommands();
         registerEvents();
         MessageUtils.sendStartupMessage(this);
@@ -58,5 +62,6 @@ public final class Main extends JavaPlugin {
         reloadConfig();
         configManager.reload();
         pointManager.reload();
+        spawnManager.reload();
     }
 }
