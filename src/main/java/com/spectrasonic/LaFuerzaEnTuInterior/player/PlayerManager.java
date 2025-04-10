@@ -27,9 +27,7 @@ public class PlayerManager implements Listener {
         
         // Cancelar mensaje de muerte y drops
         event.setDeathMessage(null);
-        event.getDrops().clear();
         event.setDroppedExp(0);
-        
         // Manejar la muerte del jugador
         plugin.getGameManager().handlePlayerDeath(victim, killer);
         
