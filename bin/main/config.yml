@@ -6,7 +6,7 @@ point_gain: 1
 point_loose: 1
 
 respawn_points:
-    respawn1: { x: -1955, y: -3, z: -11379 }
+    respawn1: { x: -1945, y: -3, z: -11379 }
     respawn2: { x: -1989, y: -3, z: -11413 }
     respawn3: { x: -1955, y: -3, z: -11447 }
     respawn4: { x: -1921, y: -3, z: -11413 }

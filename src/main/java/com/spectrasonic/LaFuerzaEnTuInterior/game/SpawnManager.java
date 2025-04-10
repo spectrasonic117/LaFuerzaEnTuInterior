@@ -8,6 +8,7 @@ import java.util.Random;
 
 @Getter
 public class SpawnManager {
+    
     private final Main plugin;
     private final Random random;
     private List<Location> respawnPoints;

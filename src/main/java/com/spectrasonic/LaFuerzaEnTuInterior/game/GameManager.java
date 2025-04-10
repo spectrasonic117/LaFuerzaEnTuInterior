@@ -58,6 +58,11 @@ public class GameManager {
                 cleanupPlayer(player);
             }
         }
+        
+        // MessageUtils.broadcastTitle("<gold>¡La Fuerza Interior!</gold>", 
+        //         "<red>¡El juego ha terminado!</red>", 1, 3, 1);
+        // MessageUtils.sendBroadcastMessage("<gold>¡El juego La Fuerza Interior ha terminado!</gold>");
+        SoundUtils.broadcastPlayerSound(Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
     }
         
     public void preparePlayer(Player player) {
@@ -113,7 +118,7 @@ public class GameManager {
         
         if (killer != null) {
             plugin.getPointManager().addKillPoints(killer);
-            MessageUtils.sendMessage(killer, "<green>¡Has eliminado a " + victim.getName() + "!</green>");
+            MessageUtils.sendMessage(killer, "<green>¡Eliminaste a " + victim.getName() + "!</green>");
         }
         
         plugin.getPointManager().addDeathPoints(victim);
