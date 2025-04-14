@@ -3,16 +3,15 @@ package com.spectrasonic.LaFuerzaEnTuInterior.game;
 import com.spectrasonic.LaFuerzaEnTuInterior.Main;
 import com.spectrasonic.Utils.ItemBuilder;
 import com.spectrasonic.Utils.MessageUtils;
-import com.spectrasonic.Utils.SoundUtils;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 
 @Getter
 public class GameManager {
@@ -62,18 +61,18 @@ public class GameManager {
         for (var world : Bukkit.getWorlds()) {
             world.setGameRule(GameRule.KEEP_INVENTORY, false);
         }
-        
+
         // Limpiar a todos los jugadores
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.getGameMode() == GameMode.SURVIVAL) {
+            if (player.getGameMode() == GameMode.ADVENTURE) {
                 cleanupPlayer(player);
             }
+
         }
-        
         // MessageUtils.broadcastTitle("<gold>¡La Fuerza Interior!</gold>", 
         //         "<red>¡El juego ha terminado!</red>", 1, 3, 1);
         // MessageUtils.sendBroadcastMessage("<gold>¡El juego La Fuerza Interior ha terminado!</gold>");
-        SoundUtils.broadcastPlayerSound(Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
+        // SoundUtils.broadcastPlayerSound(Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
     }
     
     public void preparePlayer(Player player) {
@@ -94,6 +93,7 @@ public class GameManager {
                 .addEnchantment("sharpness", sharpnessLevel)
                 .setFlag("HIDE_ENCHANTS")
                 .setUnbreakable(true)
+                .setCustomModelData(101)
                 .build();
         
         player.getInventory().addItem(sword);
@@ -103,10 +103,10 @@ public class GameManager {
         player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, Integer.MAX_VALUE, strengthLevel, false, false, true));
         
         // Cambiar a modo supervivencia
-        player.setGameMode(GameMode.SURVIVAL);
+        // player.setGameMode(GameMode.SURVIVAL);
         
         // Teletransportar a un punto de spawn aleatorio
-        player.teleport(spawnManager.getRandomSpawnPoint());
+        // player.teleport(spawnManager.getRandomSpawnPoint());
         
         // Restaurar salud y comida
         player.setHealth(player.getMaxHealth());
@@ -124,7 +124,7 @@ public class GameManager {
         }
         
         // Cambiar a modo aventura
-        player.setGameMode(GameMode.ADVENTURE);
+        // player.setGameMode(GameMode.ADVENTURE);
         
         // Restaurar salud y comida
         player.setHealth(player.getMaxHealth());
