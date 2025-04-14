@@ -25,7 +25,6 @@ public class RespawnListener implements Listener {
             // Game is not running, don't change the respawn location
             return;
         }
-
         List<Location> respawnPoints = plugin.getConfigManager().getRespawnLocations();
         if (respawnPoints.isEmpty()) return;
 

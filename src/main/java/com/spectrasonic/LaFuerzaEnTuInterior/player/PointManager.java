@@ -34,7 +34,7 @@ public class PointManager {
             SoundUtils.playerSound(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f);
         } else {
             pointsManager.subtractPoints(player, Math.abs(points));
-            MessageUtils.sendActionBar(player, "<red><b>-" + points + " puntos</red>");
+            MessageUtils.sendActionBar(player, "<red><b>" + points + " puntos</red>");
             SoundUtils.playerSound(player, Sound.ENTITY_ELDER_GUARDIAN_CURSE, 1.0f, 1.0f);
         }
     }

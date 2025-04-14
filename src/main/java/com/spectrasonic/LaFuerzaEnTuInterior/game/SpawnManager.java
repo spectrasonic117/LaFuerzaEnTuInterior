@@ -26,5 +26,6 @@ public class SpawnManager {
         }
         
         return respawnPoints.get(random.nextInt(respawnPoints.size()));
+        
     }
 }

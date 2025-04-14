@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 @Getter
 public class GameEvents implements Listener {
@@ -27,8 +26,4 @@ public class GameEvents implements Listener {
         }
     }
     
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
-        // Podríamos implementar lógica adicional si fuera necesario
-    }
 }
