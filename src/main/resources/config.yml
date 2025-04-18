@@ -12,3 +12,22 @@ respawn_points:
     respawn4: { x: -1921, y: -3, z: -11413 }
     respawn5: { x: -1938, y: -6, z: -11396 }
     respawn6: { x: -1972, y: -6, z: -11430 }
+
+    respawn7: { x: -1918, y: -3, z: -11451 }
+    respawn8: { x: -1993, y: -3, z: -11451 }
+    respawn9: { x: -1993, y: -3, z: -11376 }
+    respawn10: { x: -1918, y: -3, z: -11376 }
+
+    respawn11: { x: -1926, y: -6, z: -11384 }
+    respawn12: { x: -1926, y: -6, z: -11444 }
+    respawn13: { x: -1986, y: -6, z: -11444 }
+    respawn14: { x: -1986, y: -6, z: -11384 }
+
+    respawn15: { x: -1972, y: -6, z: -11419 }
+    respawn16: { x: -1972, y: -6, z: -11409 }
+    respawn17: { x: -1961, y: -6, z: -11398 }
+    respawn18: { x: -1951, y: -6, z: -11398 }
+    respawn19: { x: -1940, y: -6, z: -11409 }
+    respawn20: { x: -1940, y: -6, z: -11419 }
+    respawn21: { x: -1951, y: -6, z: -11430 }
+    respawn22: { x: -1961, y: -6, z: -11419 }

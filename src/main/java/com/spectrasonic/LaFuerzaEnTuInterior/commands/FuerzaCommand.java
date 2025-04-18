@@ -5,6 +5,7 @@ import co.aikar.commands.annotation.*;
 import com.spectrasonic.LaFuerzaEnTuInterior.Main;
 import com.spectrasonic.Utils.MessageUtils;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 @CommandAlias("fuerza")
 public class FuerzaCommand extends BaseCommand {
@@ -26,7 +27,9 @@ public class FuerzaCommand extends BaseCommand {
                 MessageUtils.sendMessage(sender, "<red>¡El juego ya está en curso!</red>");
                 return;
             }
-            
+            Player player = (Player) sender;
+            player.performCommand("pvp on");
+            player.performCommand("multiwarp setrespawn 3_11");
             plugin.getGameManager().startGame();
             MessageUtils.sendMessage(sender, "<green>¡Juego iniciado!</green>");
         }
@@ -38,6 +41,8 @@ public class FuerzaCommand extends BaseCommand {
                 MessageUtils.sendMessage(sender, "<red>¡El juego no está en curso!</red>");
                 return;
             }
+            Player player = (Player) sender;
+            player.performCommand("pvp off");
             
             plugin.getGameManager().stopGame();
             MessageUtils.sendMessage(sender, "<green>¡Juego detenido!</green>");

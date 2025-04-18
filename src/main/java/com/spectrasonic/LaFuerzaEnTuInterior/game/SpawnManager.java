@@ -28,5 +28,6 @@ public class SpawnManager {
             return plugin.getServer().getWorlds().get(0).getSpawnLocation();
         }
         return respawnPoints.get(random.nextInt(respawnPoints.size()));
+        
     }
 }

@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+
 @Getter
 public class GameManager {
     private final Main plugin;
@@ -54,15 +55,15 @@ public class GameManager {
         );
         
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player.getGameMode() == GameMode.SURVIVAL) {
+            if (player.getGameMode() == GameMode.ADVENTURE) {
                 cleanupPlayer(player);
             }
+
         }
-        
         // MessageUtils.broadcastTitle("<gold>¡La Fuerza Interior!</gold>", 
         //         "<red>¡El juego ha terminado!</red>", 1, 3, 1);
         // MessageUtils.sendBroadcastMessage("<gold>¡El juego La Fuerza Interior ha terminado!</gold>");
-        SoundUtils.broadcastPlayerSound(Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
+        // SoundUtils.broadcastPlayerSound(Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
     }
         
     public void preparePlayer(Player player) {
