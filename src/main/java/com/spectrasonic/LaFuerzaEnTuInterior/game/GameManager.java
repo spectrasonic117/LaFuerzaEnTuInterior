@@ -24,106 +24,108 @@ public class GameManager {
         this.spawnManager = new SpawnManager(plugin);
         this.gameRunning = false;
     }
-    
+
     public void startGame() {
         if (gameRunning) {
             return;
         }
-        
+
         gameRunning = true;
-        
-        plugin.getServer().getWorlds().forEach(world ->
-            world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true)
-        );
-        
+
+        plugin.getServer().getWorlds().forEach(world -> {
+            world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+            world.setGameRule(GameRule.KEEP_INVENTORY, true);
+        });
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.getGameMode() == GameMode.ADVENTURE) {
                 preparePlayer(player);
             }
         }
     }
-    
+
     public void stopGame() {
         if (!gameRunning) {
             return;
         }
-        
+
         gameRunning = false;
-        
-        plugin.getServer().getWorlds().forEach(world ->
-            world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false)
-        );
-        
+
+        plugin.getServer().getWorlds().forEach(world -> {
+            world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
+            world.setGameRule(GameRule.KEEP_INVENTORY, false);
+        });
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.getGameMode() == GameMode.ADVENTURE) {
                 cleanupPlayer(player);
             }
-
         }
-        // MessageUtils.broadcastTitle("<gold>¡La Fuerza Interior!</gold>", 
-        //         "<red>¡El juego ha terminado!</red>", 1, 3, 1);
-        // MessageUtils.sendBroadcastMessage("<gold>¡El juego La Fuerza Interior ha terminado!</gold>");
-        // SoundUtils.broadcastPlayerSound(Sound.ENTITY_WITHER_DEATH, 1.0f, 1.0f);
     }
-        
+
     public void preparePlayer(Player player) {
         player.getInventory().clear();
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        
+
         int sharpnessLevel = plugin.getConfigManager().getSharpnessLevel();
         int speedLevel = plugin.getConfigManager().getSpeedLevel() - 1;
         int strengthLevel = plugin.getConfigManager().getStrengthLevel() - 1;
-        
+
         ItemStack sword = ItemBuilder.setMaterial("DIAMOND_SWORD")
                 .setName("<gold>Espada Laser</gold>")
                 .addEnchantment("sharpness", sharpnessLevel)
                 .setFlag("HIDE_ENCHANTS")
                 .setUnbreakable(true)
-                .setCustomModelData(1085)
+                .setCustomModelData(101)
                 .build();
-        
+
         player.getInventory().addItem(sword);
-        
+
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, speedLevel, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, Integer.MAX_VALUE, strengthLevel, false, false, true));
-        
+
         player.setGameMode(GameMode.SURVIVAL);
-        
+
         // player.teleport(spawnManager.getRandomSpawnPoint());
-        
+
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setSaturation(20);
     }
-    
+
+    /**
+     * Cleans up a player after the game
+     *
+     * @param player Player to clean up
+     */
     public void cleanupPlayer(Player player) {
         player.getInventory().clear();
-        
+
         for (PotionEffect effect : player.getActivePotionEffects()) {
             player.removePotionEffect(effect.getType());
         }
-        
+
         player.setGameMode(GameMode.ADVENTURE);
-        
+
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setSaturation(20);
     }
-    
+
     public void handlePlayerDeath(Player victim, Player killer) {
         if (!gameRunning) {
             return;
         }
-        
+
         if (killer != null) {
             plugin.getPointManager().addKillPoints(killer);
             MessageUtils.sendMessage(killer, "<green>¡Eliminaste a " + victim.getName() + "!</green>");
         }
-        
+
         plugin.getPointManager().addDeathPoints(victim);
-        
+
         victim.setHealth(victim.getMaxHealth());
         victim.teleport(spawnManager.getRandomSpawnPoint());
     }
