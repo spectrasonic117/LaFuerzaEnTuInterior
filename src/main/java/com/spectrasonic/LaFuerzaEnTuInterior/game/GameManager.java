@@ -12,25 +12,27 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-
 @Getter
 public class GameManager {
     private final Main plugin;
     private final SpawnManager spawnManager;
     private boolean gameRunning;
-    
+    private int currentRound;
+
     public GameManager(Main plugin) {
         this.plugin = plugin;
         this.spawnManager = new SpawnManager(plugin);
         this.gameRunning = false;
+        this.currentRound = 0;
     }
 
-    public void startGame() {
+    public void startGame(int round) {
         if (gameRunning) {
             return;
         }
 
         gameRunning = true;
+        currentRound = round;
 
         plugin.getServer().getWorlds().forEach(world -> {
             world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
@@ -50,6 +52,7 @@ public class GameManager {
         }
 
         gameRunning = false;
+        currentRound = 0;
 
         plugin.getServer().getWorlds().forEach(world -> {
             world.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, false);
@@ -88,18 +91,11 @@ public class GameManager {
 
         player.setGameMode(GameMode.SURVIVAL);
 
-        // player.teleport(spawnManager.getRandomSpawnPoint());
-
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
         player.setSaturation(20);
     }
 
-    /**
-     * Cleans up a player after the game
-     *
-     * @param player Player to clean up
-     */
     public void cleanupPlayer(Player player) {
         player.getInventory().clear();
 
@@ -120,11 +116,11 @@ public class GameManager {
         }
 
         if (killer != null) {
-            plugin.getPointManager().addKillPoints(killer);
+            plugin.getPointManager().addKillPoints(killer, currentRound);
             MessageUtils.sendMessage(killer, "<green>¡Eliminaste a " + victim.getName() + "!</green>");
         }
 
-        plugin.getPointManager().addDeathPoints(victim);
+        plugin.getPointManager().addDeathPoints(victim, currentRound);
 
         victim.setHealth(victim.getMaxHealth());
         victim.teleport(spawnManager.getRandomSpawnPoint());

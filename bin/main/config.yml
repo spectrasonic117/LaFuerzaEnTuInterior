@@ -2,8 +2,15 @@ sharpness: 255
 speed: 5
 strength: 255
 
-point_gain: 1
-point_loose: 1
+add_points:
+    round_1: 10
+    round_2: 20
+    round_3: 30
+
+substract_points:
+    round_1: 5
+    round_2: 15
+    round_3: 25
 
 respawn_points:
     respawn1: { x: -1955, y: -3, z: -11379 }

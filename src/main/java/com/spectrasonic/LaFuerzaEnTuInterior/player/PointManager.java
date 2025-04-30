@@ -13,20 +13,28 @@ public class PointManager {
 
     private final Main plugin;
     private final PointsManager pointsManager;
-    private int pointGain;
-    private int pointLoss;
-    
+    private int pointGainRound1;
+    private int pointGainRound2;
+    private int pointGainRound3;
+    private int pointLossRound1;
+    private int pointLossRound2;
+    private int pointLossRound3;
+
     public PointManager(Main plugin) {
         this.plugin = plugin;
         this.pointsManager = new PointsManager(plugin);
         reload();
     }
-    
+
     public void reload() {
-        this.pointGain = plugin.getConfigManager().getPointGain();
-        this.pointLoss = plugin.getConfigManager().getPointLoss();
+        this.pointGainRound1 = plugin.getConfigManager().getConfig().getInt("add_points.round_1", 10);
+        this.pointGainRound2 = plugin.getConfigManager().getConfig().getInt("add_points.round_2", 20);
+        this.pointGainRound3 = plugin.getConfigManager().getConfig().getInt("add_points.round_3", 30);
+        this.pointLossRound1 = plugin.getConfigManager().getConfig().getInt("substract_points.round_1", 5);
+        this.pointLossRound2 = plugin.getConfigManager().getConfig().getInt("substract_points.round_2", 15);
+        this.pointLossRound3 = plugin.getConfigManager().getConfig().getInt("substract_points.round_3", 25);
     }
-    
+
     public void addPoints(Player player, int points) {
         if (points > 0) {
             pointsManager.addPoints(player, points);
@@ -38,12 +46,24 @@ public class PointManager {
             SoundUtils.playerSound(player, Sound.ENTITY_ELDER_GUARDIAN_CURSE, 1.0f, 1.0f);
         }
     }
-        
-    public void addKillPoints(Player killer) {
-        addPoints(killer, pointGain);
+
+    public void addKillPoints(Player killer, int round) {
+        int points = switch (round) {
+            case 1 -> pointGainRound1;
+            case 2 -> pointGainRound2;
+            case 3 -> pointGainRound3;
+            default -> 0;
+        };
+        addPoints(killer, points);
     }
-    
-    public void addDeathPoints(Player victim) {
-        addPoints(victim, -pointLoss);
+
+    public void addDeathPoints(Player victim, int round) {
+        int points = switch (round) {
+            case 1 -> -pointLossRound1;
+            case 2 -> -pointLossRound2;
+            case 3 -> -pointLossRound3;
+            default -> 0;
+        };
+        addPoints(victim, points);
     }
 }
