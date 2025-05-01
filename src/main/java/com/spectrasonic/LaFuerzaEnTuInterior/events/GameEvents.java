@@ -11,19 +11,18 @@ import org.bukkit.event.player.PlayerJoinEvent;
 @Getter
 public class GameEvents implements Listener {
     private final Main plugin;
-    
+
     public GameEvents(Main plugin) {
         this.plugin = plugin;
     }
-    
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        
+
         // Si el juego está en curso y el jugador está en modo aventura, prepararlo
         if (plugin.getGameManager().isGameRunning() && player.getGameMode() == GameMode.ADVENTURE) {
             plugin.getGameManager().preparePlayer(player);
         }
     }
-    
 }

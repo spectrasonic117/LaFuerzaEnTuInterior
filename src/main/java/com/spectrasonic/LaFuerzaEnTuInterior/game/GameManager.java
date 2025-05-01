@@ -89,7 +89,7 @@ public class GameManager {
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, speedLevel, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.STRENGTH, Integer.MAX_VALUE, strengthLevel, false, false, true));
 
-        player.setGameMode(GameMode.SURVIVAL);
+        player.setGameMode(GameMode.ADVENTURE);
 
         player.setHealth(player.getMaxHealth());
         player.setFoodLevel(20);
